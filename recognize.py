@@ -48,3 +48,27 @@ def dissipation(array, measurements = 16):
 
     return sum_k / measurements
 
+def hillsAndValleys(array):
+    """ Calculate the hills and valleys of a curve.
+    Divide by length of array to make this
+    agnostic to array length.
+                   x
+    x             x x
+     x      x   x  ^
+      x   x   x
+        x   ^ ^
+        ^
+    """
+
+    hills = 0
+    valleys = 0
+    for i in range(2, len(array) - 2):
+        if array[i - 1] < array[i] and array[i + 1] < array[i]:
+            hills += 1
+        if array[i - 1] > array[i] and array[i + 1] > array[i]:
+            valleys += 1
+
+    return float((hills + valleys)) / (len(array))
+
+
+
