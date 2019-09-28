@@ -25,6 +25,37 @@ def getBeatFrames(amp_array, sample_rate, lookahead = 64, significance = 12.0, h
     return beat_frames
 
 
+def fixAmps(amp_array, multiplier_amps, frames, hop_length = 512):
+    """fixAmplitude
+    Multiply the amplitudes at locations of mul
+
+    amp_array by fixed_amp[i].
+    This will decrease the volumes
+
+    multiplier amps is associated with frames. Each frame in frame
+    should be mached with a multiplier in multiplier_amps.
+    frame    multiplier
+    12          0.5
+    28          0.9
+    34          0.7
+    .           .
+    .           .
+    .           .
+    """
+    if len(multiplier_amps) != len(frames):
+        raise Exception("error: multiplier amps and frames must be equal!");
+
+    # Match amplitude
+    for i in range(0, len(multiplier_amps)):
+
+        multiplier = multiplier_amps[i]
+
+        for amp_index in range(frames[i] * hop_length, frames[i] * hop_length + hop_length - 1):
+            amp_array[amp_index] *= multiplier
+
+
+
+
 
 def findMaxAmps(amp_array, frames, lookahead, hop_length = 512):
     """ Find the maximum amps using the maximum of each frame + lookahead
@@ -48,3 +79,4 @@ def findMaxAmps(amp_array, frames, lookahead, hop_length = 512):
         max_amps.append(abs(amp_array[max_amp_index]))
 
     return max_amps
+
