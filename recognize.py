@@ -71,4 +71,21 @@ def hillsAndValleys(array):
     return float((hills + valleys)) / (len(array))
 
 
+def curvature(array, hz = 22050):
+    """ Calculate the average curavture of the curve"""
+
+    k_sum = 0
+
+    for i in range(2, len(array) - 2):
+        slope1 = array[i] - array[i - 1]
+        slope2 = array[i + 1] - array[i]
+        av_slope = (slope1 + slope2) / 2
+        concavity = slope2 - slope1
+
+        k = abs(concavity) / ((1 + av_slope ** 2) ** 1.5)
+        k_sum += k
+
+    abs_array = [abs(x) for x in array]
+    return (k_sum / (len(array) - 2) ) * hz / max(abs_array)
+
 
