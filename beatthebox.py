@@ -74,6 +74,9 @@ def main(arguments):
             choice = input("Are you sure you want to overwrite {0}.wav?(y/N): ".format(name))
             if choice == 'n' or choice == 'N':
                 name = None
+                continue
+        librosa.output.write_wav(name, new_amp_arr, sr)
+
 
     os.remove('.temp.wav')
     # Save the beat as a wav file.

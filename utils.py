@@ -76,7 +76,7 @@ def findMaxAmp(amp_array, frame, lookahead, hop_length = 512):
     """
 
     # Multiply by frame length to determine locaiton of beat.
-    frame_start_index = init_frame * hop_length
+    frame_start_index = frame * hop_length
     max_amp_index = frame_start_index
     for index in range(frame_start_index, frame_start_index + lookahead):
 

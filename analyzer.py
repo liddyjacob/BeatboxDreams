@@ -32,7 +32,10 @@ def modify(amp_arr, sr, drumset, hop_length = 512):
     # new drum beat. We will need to multiply by the maximum frequencies
     # each frame in order to make dynamics work properly.
 
-    new_amp_arr = numpy.zeros(len(amp_array))
+    # This is a temporary solution to allow extra space for drums that have
+    # long sample. Realisticly we need to add the length of the longest sample
+    # on the given drumset
+    new_amp_arr = numpy.zeros(2 * len(amp_arr), dtype = numpy.float32)
 
     for key in drum_frames:
         drum = drum_frames[key]
@@ -46,6 +49,6 @@ def modify(amp_arr, sr, drumset, hop_length = 512):
         new_amp_arr[init : init + len(drum_amp_arr)] = temp
 
         # Normalize the volume
-        new_amp_arr[init : init + len(drum_amp_arr)] *= maxAmps[i]
+        new_amp_arr[init : init + len(drum_amp_arr)] *= maxAmp
 
     return new_amp_arr
