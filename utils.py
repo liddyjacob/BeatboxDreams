@@ -54,9 +54,6 @@ def fixAmps(amp_array, multiplier_amps, frames, hop_length = 512):
             amp_array[amp_index] *= multiplier
 
 
-
-
-
 def findMaxAmps(amp_array, frames, lookahead, hop_length = 512):
     """ Find the maximum amps using the maximum of each frame + lookahead
 
@@ -67,16 +64,23 @@ def findMaxAmps(amp_array, frames, lookahead, hop_length = 512):
     max_amps = []
 
     for init_frame in frames:
-
-        # Multiply by frame length to determine locaiton of beat.
-        frame_start_index = init_frame * hop_length
-        max_amp_index = frame_start_index
-        for index in range(frame_start_index, frame_start_index + lookahead):
-
-            if abs(amp_array[max_amp_index]) < abs(amp_array[index]):
-                max_amp_index = index
-
-        max_amps.append(abs(amp_array[max_amp_index]))
+        max_amps.append(findMaxAmp(amp_array, init_frame, lookahead, hop_length))
 
     return max_amps
 
+def findMaxAmp(amp_array, frame, lookahead, hop_length = 512):
+    """ Find the maximum amps using the maximum of each frame + lookahead
+
+    frames is a list of ints
+    lookahead is an int
+    """
+
+    # Multiply by frame length to determine locaiton of beat.
+    frame_start_index = init_frame * hop_length
+    max_amp_index = frame_start_index
+    for index in range(frame_start_index, frame_start_index + lookahead):
+
+        if abs(amp_array[max_amp_index]) < abs(amp_array[index]):
+            max_amp_index = index
+
+    return abs(amp_array[max_amp_index])
