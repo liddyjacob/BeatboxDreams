@@ -1,4 +1,4 @@
-# BeatboxDream: A terrible beatboxer's dream.
+# BeatboxDream: Renamed to Beat(the)Box.
 
 This program will convert beatbox to real drums
 I should rename this to 'the world is your drumset'
