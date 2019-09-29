@@ -11,3 +11,6 @@ pulseaudio --kill
 jack\_control  start
 ```
 * arecord(preintalled on ubuntu 18.04, useful for making .wav files.)
+
+## INSTRUCTIONS
+Make sure settings.json has your audio device listed. Use arecord -L to find audio devices.

@@ -4,12 +4,12 @@ and maintaining the drumset class
 The drumset class is located inside of here.
 """
 
-class drumset:
+class Drumset:
 
     def __init__(self, name):
 
         pass
 
-def setUpDrumset(name):
 """ Make a new folder for the drumset class to read """
+def setUpDrumset(name):
     pass

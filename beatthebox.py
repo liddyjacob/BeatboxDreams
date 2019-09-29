@@ -12,11 +12,19 @@ Options:
     --advanced  Make a bigger drumset.
 """
 from docopt import docopt
+import json
 import os
 import shutil
 import drumtools
+from recorder import record
 
 def main(arguments):
+
+    settings = None
+    with open('settings.json') as jfile:
+        settings = json.load(jfile)
+
+
     name = 'drumsets/' + arguments['<name>']
     if arguments['new']:
         if os.path.isdir(name):
@@ -36,7 +44,8 @@ def main(arguments):
     if choice == 'n':
         return 0
 
-    # record the drums
+    # record the drums. May need to import microphone
+    amp_arr, sr = record(settings["audio_device"])
 
     print("Great job! now lets make this beat rock more...")
 
