@@ -3,13 +3,14 @@
 BeatTheBox
 
 Usage:
-    BeatTheBox new <name> [--advanced]
+    BeatTheBox new <name> [--drums=<drums>]
     BeatTheBox load <name>
     BeatTheBox -h | --help
 
 Options:
     -h --help   Show this screen
     --advanced  Make a bigger drumset.
+    --drums=<drum list> Use specified drums for the new
 """
 from docopt import docopt
 import json
@@ -38,7 +39,7 @@ def main(arguments):
                 shutil.rmtree(name)
 
         os.mkdir(name)
-        drumtools.setUpDrumset(name)
+        drumtools.setUpDrumset(name, settings["record_device"])
 
     # Select drumset
     drumset = drumtools.Drumset(name)
@@ -71,7 +72,7 @@ def main(arguments):
         name = input("Name the beat: ")
         name += ".wav"
         if os.path.exists(name):
-            choice = input("Are you sure you want to overwrite {0}.wav?(y/N): ".format(name))
+            choice = input("Are you sure you want to overwrite {0}?(y/N): ".format(name))
             if choice == 'n' or choice == 'N':
                 name = None
                 continue

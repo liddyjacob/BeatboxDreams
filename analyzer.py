@@ -51,4 +51,5 @@ def modify(amp_arr, sr, drumset, hop_length = 512):
         # Normalize the volume
         new_amp_arr[init : init + len(drum_amp_arr)] *= maxAmp
 
-    return new_amp_arr
+    m = max(numpy.absolute(new_amp_arr))
+    return new_amp_arr / m

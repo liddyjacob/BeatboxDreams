@@ -7,7 +7,7 @@ import wave
 from subprocess import Popen
 import librosa
 import os
-
+import time
 """ Record device and return proper librosa objects """
 def record(device):
 
@@ -20,3 +20,10 @@ def record(device):
     os.remove(".temp.wav")
 
     return y, sr
+
+def countdown(seconds):
+    for i in range(0, 3):
+        count = 3 - i
+        print("{0}...".format(count))
+        time.sleep(1)
+    print("0!")

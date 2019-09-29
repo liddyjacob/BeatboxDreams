@@ -15,6 +15,8 @@ def getBeatFrames(amp_array, sample_rate, lookahead = 64, significance = 12.0, h
     """
     onset_frames = librosa.onset.onset_detect(y=amp_array, sr=sample_rate);
     max_amps = findMaxAmps(amp_array, onset_frames, lookahead, hop_length);
+    #if len(max_amps) == 0:
+    #    return None
     av_amps = sum(max_amps) / len(max_amps)
 
     beat_frames = []
