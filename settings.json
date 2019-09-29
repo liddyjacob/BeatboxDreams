@@ -1,6 +1,6 @@
 {
 
-  "audio_device" : "pulse"
-
+  "record_device" : "pulse",
+  "playback_device" : "default"
 
 }

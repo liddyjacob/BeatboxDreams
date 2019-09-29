@@ -11,7 +11,7 @@ import os
 """ Record device and return proper librosa objects """
 def record(device):
 
-    command = "arecord .temp.wav --device=\"{0}\" > /dev/null".format(device)
+    command = "arecord .temp.wav -q --device=\"{0}\" > .out.log >/dev/null".format(device)
     proc = Popen(command, shell=True) # Kill proccess when done
     input("Recording audio, press enter when you are done...")
     proc.kill()

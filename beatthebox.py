@@ -17,6 +17,9 @@ import os
 import shutil
 import drumtools
 from recorder import record
+from analyzer import modify
+import librosa
+from playback import play
 
 def main(arguments):
 
@@ -45,14 +48,19 @@ def main(arguments):
         return 0
 
     # record the drums. May need to import microphone
-    amp_arr, sr = record(settings["audio_device"])
+    amp_arr, sr = record(settings["record_device"])
 
     print("Great job! now lets make this beat rock more...")
 
-    # Analyze the drums
+    # Analyze and modify the track
+    new_amp_arr = modify(amp_arr, sr, drumset)
 
-    no_choice = input("Press enter to hear the revised beat:")
+    # Save the drums temporary:
+    librosa.output.write_wav('.temp.wav', new_amp_arr, sr)
 
+    no_choice = input("Press enter to hear the revised beat")
+
+    play('.temp.wav', settings["playback_device"])
 
     choice = input("Save the beat?(Y/n): ")
     if choice == 'n':
@@ -67,6 +75,7 @@ def main(arguments):
             if choice == 'n' or choice == 'N':
                 name = None
 
+    os.remove('.temp.wav')
     # Save the beat as a wav file.
 
 if __name__ == '__main__':
